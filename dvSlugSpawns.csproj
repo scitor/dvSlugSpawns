@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>dvSlugSpawnsMod</AssemblyName>
+    <Description>Permanent Slug Spawns</Description>
+    <Version>1.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>dvSlugSpawnsMod</RootNamespace>
+    <ReferencePath>E:\Steam\steamapps\common\Derail Valley\DerailValley_Data\Managed</ReferencePath>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <AssemblySearchPaths>
+       $(AssemblySearchPaths);
+       $(ReferencePath);
+    </AssemblySearchPaths>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp" />
+    <Reference Include="DV.Simulation" />
+    <Reference Include="DV.ThingTypes" />
+    <Reference Include="DV.UI" />
+    <Reference Include="DV.Utils" />
+    <Reference Include="UnityEngine.UI" />
+    <Reference Include="UnityEngine.IMGUIModule" />
+    <Reference Include="UnityEngine" />
+    <Reference Include="UnityEngine.CoreModule" />
+
+    <PackageReference Include="UnityModManager" Version="0.27.2" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!-- Copy to build folder -->
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="build/" />
+
+    <!-- Package after Release build -->
+    <Exec Condition="'$(ConfigurationName)' == 'Release' And '$(OS)' == 'Windows_NT'" Command="powershell -executionpolicy bypass -Command &quot;(./package.ps1)&quot;" />
+    <Exec Condition="'$(ConfigurationName)' == 'Release' And '$(OS)' != 'Windows_NT'" Command="pwsh  -Command &quot;(./package.ps1)&quot;" />
+  </Target>
+</Project>
