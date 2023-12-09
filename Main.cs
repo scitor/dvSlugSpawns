@@ -36,6 +36,7 @@ public static class Main
         Harmony harmony = new Harmony(modEntry.Info.Id);
         if (active) {
             harmony.PatchAll(Assembly.GetExecutingAssembly());
+            CsvConfig.ReadSpawns();
         } else {
             harmony.UnpatchAll(modEntry.Info.Id);
         }

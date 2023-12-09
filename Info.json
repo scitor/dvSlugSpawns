@@ -2,7 +2,7 @@
   "Id": "dvSlugSpawns",
   "DisplayName": "DV Slug Spawns Mod",
   "Author": "scitor",
-  "Version": "1.0.0",
+  "Version": "1.1.0",
   "HomePage": "https://github.com/scitor/dvSlugSpawns",
   "AssemblyName": "dvSlugSpawnsMod.dll",
   "EntryMethod": "dvSlugSpawns.Main.Load",
